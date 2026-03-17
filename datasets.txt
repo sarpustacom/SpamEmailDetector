@@ -2,4 +2,4 @@ https://www.kaggle.com/datasets/ashfakyeafi/spam-email-classification
 
 https://www.kaggle.com/datasets/meruvulikith/190k-spam-ham-email-dataset-for-classification (current)
 
-https://www.kaggle.com/datasets/orvile/turkish-spam-v01
+https://www.kaggle.com/datasets/leitocan/turkis-spam-email/data (used)
