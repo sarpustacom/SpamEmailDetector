@@ -10,7 +10,7 @@ from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout, Bidirection
 from sklearn.model_selection import train_test_split
 
 # --- Configuration ---
-DATASET_PATH = "data/tr_email_spam.csv"
+DATASET_PATH = "../../data/tr_email_spam.csv"
 MODEL_NAME = "spam_detector_model.keras"
 TOKENIZER_NAME = "tokenizer.pkl"
 MAX_WORDS = 10000

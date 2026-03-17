@@ -3,8 +3,8 @@ import pickle
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # Yükleme
-model = tf.keras.models.load_model("spam_detector_model.keras")
-with open('tokenizer.pkl', 'rb') as handle:
+model = tf.keras.models.load_model("../../spam_detector_model.keras")
+with open('../../tokenizer.pkl', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
 

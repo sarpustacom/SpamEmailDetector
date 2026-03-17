@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
 # 1. Veri Hazırlığı
-df = pd.read_csv("data/tr_email_spam.csv")
+df = pd.read_csv("../../data/tr_email_spam.csv")
 df['label'] = df['Classification'].str.strip().str.lower().map({'non-spam': 0, 'spam': 1})
 df = df.dropna(subset=['label', 'Text'])
 
@@ -39,7 +39,7 @@ model.fit(X_train, y_train, epochs=60, batch_size=16, validation_data=(X_test, y
 
 # 4. Kaydetme
 model.save("l2_spam_model.keras")
-with open("tfidf_vectorizer.pkl", "wb") as f:
+with open("../../tfidf_vectorizer.pkl", "wb") as f:
     pickle.dump(tfidf, f)
 
 print("\n✅ L2 Modeli başarıyla kaydedildi!")

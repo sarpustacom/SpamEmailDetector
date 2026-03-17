@@ -2,8 +2,8 @@ import tensorflow as tf
 import pickle
 
 # Yükleme
-model = tf.keras.models.load_model("super_spam_model.keras")
-with open("super_tfidf.pkl", "rb") as f:
+model = tf.keras.models.load_model("../../super_spam_model.keras")
+with open("../../super_tfidf.pkl", "rb") as f:
     tfidf = pickle.load(f)
 
 

@@ -5,12 +5,12 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
 import pickle
 
-model = load_model('spam_model_v1.h5')
+model = load_model('../../spam_model_v1.h5')
 
 text_input = str(input("Please enter the message: "))
 
 
-with open('tokenizer.pickle', 'rb') as handle:
+with open('../../tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
 max_len = 100
