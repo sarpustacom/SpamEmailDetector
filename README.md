@@ -1,5 +1,5 @@
 # SpamEmailDetector 🛡️
-A high-performance Recurrent Neural Network (RNN) using LSTM (Long Short-Term Memory) architecture to classify Turkish emails/messages as Ham (Secure) or Spam.
+A high-performance Recurrent Neural Network (RNN) using LSTM (Long Short-Term Memory) architecture to classify emails/messages as Ham (Secure) or Spam.
 
 This project leverages a large-scale Turkish dataset (190,000+ entries) and is optimized for Apple Silicon (M4) hardware using TensorFlow Metal.
 
