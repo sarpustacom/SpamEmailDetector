@@ -19,5 +19,5 @@ def predict_v3(text):
 
 # Test
 predict_v3("Merhaba, yarın föylerinizi getirmeyi unutmayın.")
-predict_v3("OROSPU evladı bak buraya 100TL bet oynayana 200Tl bedava")
+predict_v3("OR*SPU evladı bak buraya 100TL bet oynayana 200Tl bedava")
 predict_v3("ÖNEMLİ: Hesabınız tehlikede, hemen bu linke tıklayarak şifrenizi güncelleyin!")

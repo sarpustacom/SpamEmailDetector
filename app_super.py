@@ -4,10 +4,12 @@ import pickle
 import numpy as np
 import pandas as pd
 import os
+import subprocess
+import sys
 
 # --- Konfigürasyon ---
-MODEL_PATH = "super_spam_model.keras"
-VECTORIZER_PATH = "super_tfidf.pkl"
+MODEL_PATH = "models/super_spam_model.keras"
+VECTORIZER_PATH = "vectorizers/super_tfidf.pkl"
 DATASET_PATH = "data/tr_email_spam.csv"
 
 st.set_page_config(page_title="M4 Super Spam Detector", page_icon="🛡️", layout="centered")
@@ -20,6 +22,46 @@ if 'prediction_done' not in st.session_state:
     st.session_state.current_text = ""
     st.session_state.confirm_save = False
     st.session_state.target_label = ""
+
+
+
+
+def run_training():
+    with st.spinner("🚀 M4 GPU üzerinde eğitim başladı... Bu işlem 1-2 dakika sürebilir."):
+        try:
+            # train_super_model.py dosyasını harici bir süreç olarak çalıştırır
+            result = subprocess.run([sys.executable, "train_supermodel.py"], capture_output=True, text=True)
+            if result.returncode == 0:
+                st.success("✅ Model başarıyla eğitildi ve güncellendi!")
+                st.balloons()
+                # Yeni modeli ve vectorizer'ı belleğe tekrar yükle
+                st.cache_resource.clear()
+            else:
+                st.error(f"Eğitim sırasında hata oluştu: {result.stderr}")
+        except Exception as e:
+            st.error(f"Beklenmeyen bir hata: {e}")
+
+# --- Kelime Analizi Fonksiyonu ---
+def analyze_words(text, tfidf, model):
+    # Kelimeleri ayır
+    words = text.lower().split()
+    word_scores = []
+
+    for word in set(words):  # Tekrar eden kelimeleri ele
+        # Sadece bu kelime varmış gibi bir vektör oluştur
+        vec = tfidf.transform([word]).toarray()
+        if np.max(vec) > 0:  # Eğer kelime modelin sözlüğünde varsa
+            score = model.predict(vec, verbose=0)[0][0]
+            word_scores.append((word, score))
+
+    # En yüksek spam puanına sahip ilk 5 kelimeyi getir
+    word_scores.sort(key=lambda x: x[1], reverse=True)
+    return word_scores[:5]
+
+
+# --- UI Kısmına Ekleme ---
+# (Tahmin yapıldıktan hemen sonra)
+
 
 
 # --- CSV'ye Ekleme Fonksiyonu ---
@@ -82,7 +124,23 @@ if st.session_state.prediction_done:
         st.success(f"### ✅ TEMİZ (%{(1 - prob) * 100:.2f})")
         current_label = "non-spam"
 
+
+
     st.progress(float(prob))
+
+    if prob > 0.5:
+        st.subheader("🔍 Şüpheli Kelime Analizi")
+        top_words = analyze_words(email_text, tfidf, model)
+
+        if top_words:  # Eğer analiz edilecek kelime bulunduysa
+            # Sütunları güvenli bir şekilde oluştur
+            cols = st.columns(len(top_words))
+            for i, (word, score) in enumerate(top_words):
+                with cols[i]:
+                    st.info(f"**{word}**")  # info kutucuğu daha şık durur
+                    st.caption(f"Spam: %{score * 100:.1f}")
+        else:
+            st.write("🧐 Bu mesajdaki kelimeler modelin sözlüğünde bulunamadı, ancak genel yapı spam şüphesi taşıyor.")
 
     # --- EKLEME BÖLÜMÜ ---
     st.subheader("📥 Veri Setine Ekle")
@@ -125,3 +183,16 @@ if st.session_state.prediction_done:
 
 
 st.caption("Apple M4 GPU Performance Optimized Model v1.02")
+
+# --- Yan Menü (Sidebar) ---
+with st.sidebar:
+    st.header("⚙️ Yönetim Paneli")
+    st.write(f"📊 Mevcut Veri Seti: {len(pd.read_csv(DATASET_PATH))} Satır")
+
+    if st.button("🔄 Modeli Yeniden Eğit"):
+        run_training()
+
+    st.divider()
+    st.caption("Not: Yeni veriler ekledikten sonra modeli güncellemeyi unutmayın.")
+
+
