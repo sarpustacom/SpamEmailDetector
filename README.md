@@ -36,13 +36,15 @@ Dense Output: 1-unit Sigmoid layer producing a probability between 0.0 and 1.0.
 
 📥 Installation
 Bash
-# Clone the repository
+## Clone the repository
 git clone https://github.com/yourusername/SpamEmailDetector.git
 
-# Install dependencies optimized for Apple Silicon
-pip install tensorflow-metal
-pip install -r requirements.txt
-🖥️ Usage
+## Install dependencies optimized for Apple Silicon
+`pip install tensorflow-metal`
+
+`pip install -r requirements.txt`
+
+## 🖥️ Usage
 ### 1. Training
 
 Ensure your dataset is cleaned and labels are encoded. Run the training script to generate the .keras model and .pickle tokenizer.
