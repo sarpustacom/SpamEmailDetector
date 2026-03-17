@@ -1,0 +1,5 @@
+/data/email.csv
+/data/spam_Emails_data.csv
+/data/trspam.csv
+/spam_model_v1.h5
+/tokenizer.pickle
