@@ -32,6 +32,18 @@ git clone [https://github.com/yourusername/SpamEmailDetector.git](https://github
 pip install tensorflow-metal streamlit scikit-learn pandas
 ```
 
+Download the dataset in the link below
+```bash
+https://www.kaggle.com/datasets/leitocan/turkis-spam-email/data
+```
+Create a data directory
+
+```bash
+mkdir data
+```
+
+Move tr_email_spam.csv to Data folder.
+
 ## 🖥️ Usage
 1. **Train the Model**: Ensure your dataset is in data/tr_email_spam.csv and run:
 ```bash
