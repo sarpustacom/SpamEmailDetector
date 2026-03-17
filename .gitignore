@@ -3,3 +3,5 @@
 /data/trspam.csv
 /spam_model_v1.h5
 /tokenizer.pickle
+/tokenizer2.pickle
+/spam_model_v2.h5
