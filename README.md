@@ -4,13 +4,13 @@ A high-performance Recurrent Neural Network (RNN) using LSTM (Long Short-Term Me
 This project leverages a large-scale Turkish dataset (190,000+ entries) and is optimized for Apple Silicon (M4) hardware using TensorFlow Metal.
 
 ## 🚀 Features
-Deep Learning Architecture: Utilizes LSTM layers to capture long-term dependencies in Turkish text.
+Deep Learning Architecture: Utilizes LSTM layers to capture long-term dependencies in text.
 
-Massive Dataset: Trained on 190K+ rows to handle complex linguistic patterns and Turkish slang/agglutinative structure.
+Massive Dataset: Trained on 190K+ rows to handle complex linguistic patterns and slang/agglutinative structure.
 
 Hardware Accelerated: Optimized for M4 GPU (Metal) for significantly faster training epochs.
 
-Advanced Preprocessing: Custom tokenization and padding pipeline for handling Turkish characters and varying message lengths.
+Advanced Preprocessing: Custom tokenization and padding pipeline for handling characters and varying message lengths.
 
 ## 🛠️ Tech Stack
 Core: Python 3.12
